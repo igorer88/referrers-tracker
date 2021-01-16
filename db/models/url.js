@@ -28,4 +28,4 @@ urlSchema.methods.showInfo = () => {
 }
 
 
-module.exports = mongoose.model('Url', urlSchema);
+module.exports = mongoose.model('url', urlSchema);

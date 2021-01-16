@@ -58,4 +58,4 @@ userSchema.methods.createToken = (userId) => {
   return jwt.encode(payload, process.env.TOKEN_KEY);
 }
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('user', userSchema);
