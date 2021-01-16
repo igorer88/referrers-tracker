@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
+        unique: true,
         required: true
     },
     password: {
@@ -26,9 +27,9 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 userSchema.methods.showInfo = () => {
-  if (this.id){
+  if (this._id){
     console.log(`
-      id: ${this.id},
+      id: ${this._id},
       username: ${this.username},
       password: ${this.password},
       verified: ${this.verified},
@@ -43,17 +44,16 @@ userSchema.methods.showInfo = () => {
 userSchema.methods.savedStatus = () => {
   if (this.id){
     console.log(`
-      The User with the id: ${this.id} with the short URL: ${this.shortURL},
-      has been saved at ${this.createdAt}.
+      The User with the id: ${this._id}, has been saved at ${this.createdAt}.
     `);
   }
 }
 
-userSchema.methods.createToken = (user_id) => {
+userSchema.methods.createToken = (userId) => {
   const payload = {
-    user_id: user_id,
-    create_at: moment().unix(),
-    expire_at: moment().add(1, 'day').unix()
+    userId: userId,
+    createAt: moment().unix(),
+    expireAt: moment().add(1, 'day').unix()
   };
   return jwt.encode(payload, process.env.TOKEN_KEY);
 }
