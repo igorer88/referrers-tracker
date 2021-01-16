@@ -31,5 +31,6 @@ db.once('open', () => {
 });
 
 module.exports = {
+    cn,
     db
 };
