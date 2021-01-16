@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const urlController = require('./url.controller');
 const authController = require('./auth.controller');
+const middleware = require('./middleware');
 
 /* GET API Root. */
 router.get('/api', async (req, res) => {
@@ -17,6 +18,9 @@ router.get('/api', async (req, res) => {
 router.post('/api/auth/signup', authController.signup);
 /* POST login. */
 router.post('/api/auth/login', authController.login);
+
+/* Token checker. */
+router.use(middleware.checkToken);
 
 /* POST URL. */
 router.post('/api/urls', urlController.createUrl);

@@ -13,9 +13,8 @@ const createUrl = async (req, res) => {
       return res.status(201).send({ Code: 201, Status: 'Success', Message: link });
   } catch (error) {
       if (error.code === 11000) {
-        return res.status(400).send({ Code: 400, Status: 'Error', Message: 'The Url already exist.' });
+        return res.status(409).send({ Code: 409, Status: 'Error', Message: 'The url already exist.' });
       }
-      console.error('Error on ', req.path);
       console.error(error);
       return res.status(500).send({ Code: 500, Status: 'Error', Message: 'Something went wrong. Please try again.' });
   }
