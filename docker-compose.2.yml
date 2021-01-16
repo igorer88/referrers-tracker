@@ -9,10 +9,11 @@ services:
       - "7500:7500"
     links:
       - database
+
   database:
     container_name: mongoDB
     image: mongo:4.4.3
     volumes:
       - ./db/data:/data/
     ports:
-      - '27018:27017'
+      - "27018:27017"
