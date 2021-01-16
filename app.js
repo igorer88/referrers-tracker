@@ -10,13 +10,12 @@ const routes = require('./routes/api');
 
 require('dotenv').config();
 
-const port = process.env.PORT || 5000;
+const port = process.env.API_PORT || 7500;
 const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
 const corsOptions = {
-  origin: 'http://localhost:8080',
   optionsSuccessStatus: 200
 };
 

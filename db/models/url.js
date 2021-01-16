@@ -2,8 +2,9 @@
 
 const mongoose = require('mongoose');
 const urlSchema = new mongoose.Schema({
-    url: {
+    pathname: {
       type: String,
+      unique: true,
       required: true
     },
     clicks: {
@@ -18,7 +19,7 @@ urlSchema.methods.showInfo = () => {
     console.log(`
       id: ${this.id},
       url: ${this.url},
-      verified: ${this.clicks},
+      clicks: ${this.clicks},
       createdAt: ${this.createdAt},
       updatedAt: ${this.updatedAt}
       `
@@ -26,13 +27,5 @@ urlSchema.methods.showInfo = () => {
   }
 }
 
-urlSchema.methods.savedStatus = () => {
-  if (this.id){
-    console.log(`
-      The URL with the id: ${this.id} with the URL: ${this.url},
-      has been saved at ${this.createdAt}.
-    `);
-  }
-}
 
 module.exports = mongoose.model('Url', urlSchema);

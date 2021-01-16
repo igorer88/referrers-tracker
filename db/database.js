@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const cn = {
     host: 'localhost',
-    port: '27017',
+    port: '27018',
     database: 'referrers-tracker',
     user: 'root',
     password:  '1234',
@@ -15,7 +15,8 @@ const cn = {
 const mongooseOptions = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 };
 
 mongoose.connect(`mongodb://${cn.host}:${cn.port}/${cn.database}`, mongooseOptions, error => {
