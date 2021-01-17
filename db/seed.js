@@ -26,7 +26,7 @@ const data = [{
         {
             '_id': '600353d679c7ab42d17e2d91',
             'username': 'admin',
-            'password': '',
+            'password': '$2b$10$FD1rksY5YhB1fomqDyfyFev.gs04P595a4v40TFlu8lTovigj.fV.',
             'verified': true,
             'deleted': false
         }
