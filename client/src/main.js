@@ -5,7 +5,10 @@ import router from './router';
 import 'buefy/dist/buefy.css';
 
 Vue.config.productionTip = false;
-Vue.use(Buefy);
+
+Vue.use(Buefy, {
+  defaultIconPack: 'fas'
+});
 
 new Vue({
   router,
