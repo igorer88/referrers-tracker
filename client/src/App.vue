@@ -1,30 +1,49 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <AppHeader v-if="authenticated" />
+    <router-view @authenticated="setAuthenticated" />
   </div>
-  <router-view />
 </template>
+<script>
+import AppHeader from '@/components/AppHeader';
 
-<style>
+export default {
+  name: 'App',
+  components: { AppHeader },
+  data() {
+    return {
+      authenticated: false
+    };
+  },
+  mounted() {
+    if (!this.authenticated) {
+      this.$router.replace({ name: 'Login' });
+    }
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to) {
+        console.log(to);
+        document.title = `${process.env.VUE_APP_TITLE} | ${to.name}`;
+      }
+    }
+  }
+};
+</script>
+<style lang="scss">
+@import 'scss/main.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
