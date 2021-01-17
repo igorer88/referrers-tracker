@@ -29,7 +29,6 @@ export default {
     $route: {
       immediate: true,
       handler(to) {
-        console.log(to);
         document.title = `${process.env.VUE_APP_TITLE} | ${to.name}`;
       }
     }
@@ -39,6 +38,10 @@ export default {
 <style lang="scss">
 @import 'scss/main.scss';
 
+body {
+  background: #2c3e50;
+  height: 100vh;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
