@@ -46,7 +46,12 @@ const updateClicks = async (req, res) => {
     updated.__v = undefined;
     return res
       .status(200)
-      .send({ code: 200, status: 'Success', message: updated });
+      .send({
+        code: 200,
+        status: 'Success',
+        message: 'Url sucessfully updated',
+        payload: updated,
+      });
   } catch (error) {
     return res.status(500).send({
       code: 500,
