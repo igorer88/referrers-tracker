@@ -11,10 +11,10 @@
         <a
           target="_blank"
           rel="noopener"
-          :href="el.pathname"
-          @click="clickHandler(el.pathname)"
+          :href="el.href"
+          @click="clickHandler(el.href)"
         >
-          {{ el.pathname + ' - ' + el.clicks + ' Clicks' }}
+          {{ el.href + ' - ' + el.clicks + ' Clicks' }}
         </a>
       </div>
     </div>
