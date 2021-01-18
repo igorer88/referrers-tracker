@@ -33,8 +33,15 @@
                   </b-field>
                   <b-field
                     label="Confirm password"
-                    :type="{ 'is-success': checkPassword }"
-                    :message="checkPassword"
+                    :type="
+                      ({ 'is-success': checkPassword },
+                      { 'is-danger': !checkPassword })
+                    "
+                    :message="
+                      checkPassword
+                        ? 'Password matches!'
+                        : 'Password must match!'
+                    "
                   >
                     <b-input
                       type="password"
@@ -69,7 +76,9 @@
                   </div>
                 </form>
                 <br />
-                <a href="#/login"><span>Already registered? Login</span></a>
+                <a href="#/login">
+                  <span>Already registered? <strong>Log in</strong></span>
+                </a>
               </div>
             </div>
           </div>
@@ -80,8 +89,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-import { /*mapActions,*/ mapState } from 'vuex';
 import axios from '@/config/axios';
 
 export default {
@@ -98,13 +105,11 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      // authStatus: state => state.auth.profile.status
-    }),
-    checkPassword: function() {
-      return this.form.password === this.form.passwordConfirm
-        ? 'Password matches!'
-        : 'Password must match!';
+    checkPassword() {
+      if (this.password === null) {
+        return false;
+      }
+      return this.form.password === this.form.passwordConfirm ? true : false;
     }
   },
   methods: {

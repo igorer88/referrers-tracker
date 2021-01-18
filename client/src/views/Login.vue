@@ -55,8 +55,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-import { /*mapActions,*/ mapState } from 'vuex';
 import axios from '@/config/axios';
 
 export default {
@@ -68,11 +66,6 @@ export default {
         password: null
       }
     };
-  },
-  computed: {
-    ...mapState({
-      // authStatus: state => state.auth.profile.status
-    })
   },
   methods: {
     resetForm() {
