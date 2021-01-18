@@ -12,7 +12,7 @@ export default {
   components: { AppHeader },
   data() {
     return {
-      authenticated: true
+      authenticated: false
     };
   },
   methods: {

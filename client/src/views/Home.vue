@@ -19,6 +19,9 @@ export default {
   name: 'Home',
   components: {
     TopUrls
+  },
+  mounted() {
+    this.$parent.setAuthenticated(true);
   }
 };
 </script>

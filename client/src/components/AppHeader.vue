@@ -4,7 +4,7 @@
     type="is-primary"
     centered
     shadow
-    v-show="$parent.authenticated"
+    v-if="$parent.authenticated"
   >
     <template #brand>
       <b-navbar-item tag="router-link" :to="{ path: '/' }">

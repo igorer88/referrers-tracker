@@ -12,7 +12,6 @@ export function ifAuthenticated(to, from, next) {
       })
       .catch(error => {
         console.error(error.response);
-        this.$emit('Authenticated', false);
         //console.log(error.response.data);
         next({ name: 'Login' });
       });
