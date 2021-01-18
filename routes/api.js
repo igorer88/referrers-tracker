@@ -10,7 +10,7 @@ const middleware = require('./middleware');
 router.get('/api', async (req, res) => {
   res.status(200).send({
     code: 200,
-    message: 'Api Root'
+    message: 'Api Root',
   });
 });
 
@@ -18,6 +18,8 @@ router.get('/api', async (req, res) => {
 router.post('/api/auth/signup', authController.signup);
 /* POST login. */
 router.post('/api/auth/login', authController.login);
+/* GET check Token. */
+router.post('/api/auth/check', authController.checkToken);
 
 /* Token checker. */
 router.use(middleware.checkToken);
