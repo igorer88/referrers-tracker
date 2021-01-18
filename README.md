@@ -1,6 +1,6 @@
 # referrers-tracker
 
-Tracks referrers to a website and their counts by domain
+Tracks referrers to a link and counts whever a click is done on it.
 
 ## Requirements:
 
