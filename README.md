@@ -20,11 +20,14 @@ Tracks referrers to a website and their counts by domain
 - Enter into project folder
 - Run docker compose file to run DB
   - `docker compose -d`
+- Install modules
+  - `yarn install`
 - Run seeder
   - `yarn run seed`
 - Run dev server
   - `yarn run dev`
 - Enter into client folder and run client app
+  - `yarn install`
   - `yarn run serve`
 
 ---
@@ -46,6 +49,7 @@ Tracks referrers to a website and their counts by domain
 > TODO: Some fixes to improve the project:
 
     - [] Fix docker issues, to containerize backend and frontend
+    - [] Better frontend validations
     - [] Add form to save new urls links
     - [] List all url links
     - [] Manage user info
