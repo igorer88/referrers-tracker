@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <section class="info__section">
-      <h3>Referrers Top 3 Urls</h3>
+      <h1>Referrers Top 3 Urls</h1>
     </section>
     <section class="urls__section">
       <div class="container">
@@ -30,7 +30,8 @@ export default {
   text-align: center;
   color: #ffffff;
 }
-h3 {
+h1 {
   margin: 40px;
+  font-weight: 700;
 }
 </style>

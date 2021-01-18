@@ -7,7 +7,7 @@
     v-if="$parent.authenticated"
   >
     <template #brand>
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
+      <b-navbar-item tag="router-link" :to="{ path: '/home' }">
         <strong>{{ appTitle }}</strong>
       </b-navbar-item>
     </template>
