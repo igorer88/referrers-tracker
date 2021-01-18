@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="card has-text-centered">
-      <Controls :loading="loading" />
+      <!-- <Controls :loading="loading" /> -->
       <div
-        class="block mb-5"
+        class="block m-5"
         v-show="!loading"
         v-for="el in topUrlList"
         :key="el._id"
@@ -22,11 +22,11 @@
 </template>
 <script>
 import axios from '@/config/axios';
-import Controls from '@/components/Controls';
+// import Controls from '@/components/Controls';
 
 export default {
   name: 'TopUrls',
-  components: { Controls },
+  // components: { Controls },
   data() {
     return {
       loading: false,
