@@ -1,19 +1,34 @@
 'use strict';
 
-const Url = require('parse-url');
+const URL = require('url').URL;
+const validUrl = require('valid-url');
 const urlSchema = require('../db/models/url');
 
 const createUrl = async (req, res) => {
   try {
-    // eslint-disable-next-line no-extra-boolean-cast
-    // if (services.validateUrl(req.body.url))
-    //  return res.status(400).send({ code: 400, message: 'Invalid URL.' });
-    const link = new Url(req.body.url);
-    await urlSchema.create({ pathname: link.href });
-    return res
-      .status(201)
-      .send({ code: 201, status: 'Success', message: link });
+    if (!validUrl.isUri(req.body.url)) {
+      return res.status(409).send({
+        code: 409,
+        status: 'Error',
+        message: 'Url validation error.',
+      });
+    }
+    const link = new URL(req.body.url);
+    let result = await urlSchema.create({
+      href: link.href,
+      protocol: link.protocol,
+      hostname: link.hostname,
+      port: link.port,
+    });
+    result.__v = undefined;
+    return res.status(201).send({
+      code: 201,
+      status: 'Success',
+      message: `The Url ${result.href} has been saved successfuly`,
+      payload: result,
+    });
   } catch (error) {
+    console.error(error);
     if (error.code === 11000) {
       return res.status(409).send({
         code: 409,
@@ -21,6 +36,7 @@ const createUrl = async (req, res) => {
         message: 'The url already exist.',
       });
     }
+    // return res.status(400).send({ code: 400, message: 'Invalid URL.' });
     console.error(error);
     return res.status(500).send({
       code: 500,
@@ -32,7 +48,7 @@ const createUrl = async (req, res) => {
 
 const updateClicks = async (req, res) => {
   try {
-    const url = await urlSchema.findOne({ pathname: req.body.url });
+    const url = await urlSchema.findOne({ href: req.body.url });
     if (!url) {
       return res
         .status(404)
@@ -40,19 +56,18 @@ const updateClicks = async (req, res) => {
     }
     url.clicks += 1;
     let updated = await urlSchema.findOneAndUpdate(
-      { pathname: url.pathname },
+      { href: url.href },
       { clicks: url.clicks }
     );
     updated.__v = undefined;
-    return res
-      .status(200)
-      .send({
-        code: 200,
-        status: 'Success',
-        message: 'Url sucessfully updated',
-        payload: updated,
-      });
+    return res.status(200).send({
+      code: 200,
+      status: 'Success',
+      message: 'Url sucessfully updated',
+      payload: updated,
+    });
   } catch (error) {
+    console.error(error);
     return res.status(500).send({
       code: 500,
       status: 'Error',
@@ -64,7 +79,6 @@ const updateClicks = async (req, res) => {
 const topHighiestClicks = async (req, res) => {
   try {
     const tops = await urlSchema.find({}).sort({ clicks: -1 }).limit(3);
-    console.log(tops);
     return tops.length === 0
       ? res.status(404).send({
           code: 404,
@@ -77,6 +91,7 @@ const topHighiestClicks = async (req, res) => {
           payload: tops,
         });
   } catch (error) {
+    console.error(error);
     return res.status(500).send({
       code: 500,
       status: 'Error',
