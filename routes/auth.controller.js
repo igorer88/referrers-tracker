@@ -27,7 +27,7 @@ const signup = async (req, res) => {
       return res.status(409).send({
         code: 409,
         status: 'Error',
-        message: 'userSchema already registered',
+        message: `Username ${req.body.username} already registered`,
       });
     }
     const cryptedPassword = bcrypt.hashSync(req.body.password, 10);
