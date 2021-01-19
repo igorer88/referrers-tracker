@@ -36,7 +36,6 @@ const createUrl = async (req, res) => {
         message: 'The url already exist.',
       });
     }
-    // return res.status(400).send({ code: 400, message: 'Invalid URL.' });
     console.error(error);
     return res.status(500).send({
       code: 500,
