@@ -22,9 +22,14 @@
       </b-navbar-item> -->
       <b-navbar-item tag="div" v-if="$parent.authenticated">
         <div class="buttons">
-          <a class="button is-light" @click="logout()">
-            Logout
-          </a>
+          <b-button
+            class="button is-primary"
+            icon-left="sign-out-alt"
+            inverted
+            @click="logout()"
+          >
+            <strong>Logout</strong>
+          </b-button>
         </div>
       </b-navbar-item>
     </template>
@@ -43,7 +48,7 @@ export default {
   methods: {
     logout() {
       this.$parent.setAuthenticated(false);
-      this.$router.replace('Login');
+      this.$router.replace('login');
     }
   }
 };
@@ -53,9 +58,6 @@ export default {
 @import '../scss/main.scss';
 #nav {
   a {
-    font-weight: bold;
-    // color: #2c3e50;
-
     &.router-link-exact-active {
       color: #ffffff;
     }

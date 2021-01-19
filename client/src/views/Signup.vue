@@ -34,13 +34,18 @@
                   <b-field
                     label="Confirm password"
                     :type="
-                      ({ 'is-success': checkPassword },
-                      { 'is-danger': !checkPassword })
+                      form.password
+                        ? checkPassword
+                          ? 'is-success'
+                          : 'is-danger'
+                        : !form.password
                     "
                     :message="
-                      checkPassword
-                        ? 'Password matches!'
-                        : 'Password must match!'
+                      form.password
+                        ? checkPassword
+                          ? 'Password matches!'
+                          : 'Password must match!'
+                        : !form.password
                     "
                   >
                     <b-input
@@ -126,7 +131,6 @@ export default {
       axios
         .post(`auth/signup`, this.form)
         .then(response => {
-          // commit("onLoginSuccess", response);
           console.log(response.data);
           this.$buefy.toast.open({
             duration: 5000,
@@ -137,7 +141,6 @@ export default {
           this.$router.replace({ name: 'Login' });
         })
         .catch(error => {
-          // commit("onLoginError", error);
           const err = error.response.data;
           this.$buefy.toast.open({
             duration: 5000,
@@ -156,9 +159,6 @@ body {
   padding: 0;
   margin: 0;
 }
-a {
-  text-decoration: none;
-}
 .hero {
   height: 100vh;
   position: relative;
@@ -166,6 +166,9 @@ a {
 .notification {
   padding-top: 20px;
   padding-bottom: 30px;
+  a:not(.button):not(.dropdown-item) {
+    text-decoration: none;
+  }
 }
 .button {
   margin-top: 10px;

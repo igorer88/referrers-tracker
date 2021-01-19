@@ -43,7 +43,9 @@
                 </form>
                 <br />
                 <a href="#/signup">
-                  <span>Don't you have a account? <strong>Signup</strong></span>
+                  <span
+                    >Don't you have an account? <strong>Signup</strong></span
+                  >
                 </a>
               </div>
             </div>
@@ -115,9 +117,6 @@ body {
   padding: 0;
   margin: 0;
 }
-a {
-  text-decoration: none;
-}
 .hero {
   height: 100vh;
   position: relative;
@@ -125,6 +124,9 @@ a {
 .notification {
   padding-top: 20px;
   padding-bottom: 30px;
+  & a:not(.button):not(.dropdown-item) {
+    text-decoration: none;
+  }
 }
 .button {
   margin-top: 10px;

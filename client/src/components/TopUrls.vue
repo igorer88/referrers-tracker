@@ -14,6 +14,7 @@
           :href="el.href"
           @click="clickHandler(el.href)"
         >
+          <b-icon icon="link" size="is-small" />
           {{ el.href + ' - ' + el.clicks + ' Clicks' }}
         </a>
       </div>
