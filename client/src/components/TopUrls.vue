@@ -2,6 +2,13 @@
   <section>
     <div class="card has-text-centered">
       <!-- <Controls :loading="loading" /> -->
+      <div class="m-5" v-if="loading">
+        <b-icon
+          icon="sync-alt"
+          :class="{ 'fa-spin': loading }"
+          size="is-medium"
+        />
+      </div>
       <div
         class="block m-5"
         v-show="!loading"
