@@ -45,7 +45,7 @@
                         ? checkPassword
                           ? 'Password matches!'
                           : 'Password must match!'
-                        : !form.password
+                        : ''
                     "
                   >
                     <b-input
@@ -141,13 +141,23 @@ export default {
           this.$router.replace({ name: 'Login' });
         })
         .catch(error => {
-          const err = error.response.data;
-          this.$buefy.toast.open({
-            duration: 5000,
-            message: `${err.message}`,
-            position: 'is-bottom',
-            type: 'is-danger'
-          });
+          if (!error.response) {
+            this.$buefy.toast.open({
+              duration: 5000,
+              message: `${error.message}, try again`,
+              position: 'is-bottom',
+              type: 'is-danger'
+            });
+            this.resetForm();
+          } else {
+            const err = error.response.data;
+            this.$buefy.toast.open({
+              duration: 5000,
+              message: `${err.message}`,
+              position: 'is-bottom',
+              type: 'is-danger'
+            });
+          }
         });
       this.loading = false;
     }
