@@ -1,6 +1,6 @@
 # referrers-tracker
 
-Tracks referrers to a link and counts whever a click is done on it.
+List referrers' top 3 links and counts whenever a click is done on it.
 
 ## Requirements:
 
@@ -52,4 +52,3 @@ Tracks referrers to a link and counts whever a click is done on it.
     - [] Better frontend validations
     - [] Add form to save new urls links
     - [] List all url links
-    - [] Manage user info
