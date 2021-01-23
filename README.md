@@ -19,7 +19,7 @@ Tracks referrers to a link and counts whever a click is done on it.
 - Clone project
 - Enter into project folder
 - Run docker compose file to run DB
-  - `docker compose -d`
+  - `docker-compose up -d`
 - Install modules
   - `yarn install`
 - Run seeder
