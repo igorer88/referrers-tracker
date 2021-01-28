@@ -80,7 +80,6 @@ export default {
       axios
         .post(`auth/login`, this.form)
         .then(response => {
-          // commit("onLoginSuccess", response);
           console.log(response.data);
           this.$buefy.toast.open({
             duration: 5000,
@@ -98,14 +97,24 @@ export default {
           });
         })
         .catch(error => {
-          // commit("onLoginError", error);
-          const err = error.response.data;
-          this.$buefy.toast.open({
-            duration: 5000,
-            message: `${err.message}`,
-            position: 'is-bottom',
-            type: 'is-danger'
-          });
+          console.error(error);
+          if (!error.response) {
+            this.$buefy.toast.open({
+              duration: 5000,
+              message: `${error.message}, try again`,
+              position: 'is-bottom',
+              type: 'is-danger'
+            });
+            this.resetForm();
+          } else {
+            const err = error.response.data;
+            this.$buefy.toast.open({
+              duration: 5000,
+              message: `${err.message}`,
+              position: 'is-bottom',
+              type: 'is-danger'
+            });
+          }
           this.resetForm();
         });
     }
