@@ -23,7 +23,7 @@ const signup = async (req, res) => {
     }
     const user = await userSchema.findOne({ username: req.body.username });
     if (user) {
-      console.error(user);
+      console.error('error: already registered', user);
       return res.status(409).send({
         code: 409,
         status: 'Error',
@@ -38,6 +38,7 @@ const signup = async (req, res) => {
     });
     newUser.password = undefined;
     newUser.__v = undefined;
+    console.log(`User ${newUser.username} has been registered successfully`);
     return res.status(201).send({
       code: 201,
       status: 'Success',
@@ -64,6 +65,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     if (!req.body.username || !req.body.password) {
+      console.error(req.body);
       return res.status(409).send({
         code: 409,
         status: 'Error',
@@ -102,12 +104,12 @@ const login = async (req, res) => {
       }
     }
   } catch (error) {
-    console.error(error);
-    return res.status(500).send({
-      code: 500,
-      status: 'Error',
-      message: 'Something went wrong. Please try again.',
-    });
+    console.error('controller', error);
+    // return res.status(500).send({
+    //   code: 500,
+    //   status: 'Error',
+    //   message: 'Something went wrong. Please try again.',
+    // });
   }
 };
 
