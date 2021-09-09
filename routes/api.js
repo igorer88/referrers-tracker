@@ -21,6 +21,7 @@ router.post('/api/auth/login', authController.login);
 /* GET check Token. */
 router.post('/api/auth/check', authController.checkToken);
 
+router.use(middleware.checkMethods);
 /* Token checker. */
 router.use(middleware.checkToken);
 
