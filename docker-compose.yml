@@ -1,0 +1,20 @@
+version: '3'
+services:
+  database:
+    container_name: RT-mongoDB
+    image: mongo:4.4.3
+    volumes:
+      - ./data:/data/
+    ports:
+      - '27018:27017'
+  server:
+    container_name: RT-Server
+    image: referrer-tracker:latest
+    build: ./server .
+    ports:
+      - '7500:7500'
+    volumes:
+      - .:/app
+      - ./data/error.log:/usr/src/app/error.log
+    links:
+      - database
