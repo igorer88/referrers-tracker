@@ -1,9 +1,9 @@
 'use strict';
 
-const userSchema = require('../db/models/user');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwt = require('jwt-simple');
+const userSchema = require('../models/user');
 
 const signup = async (req, res) => {
   try {

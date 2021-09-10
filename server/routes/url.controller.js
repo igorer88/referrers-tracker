@@ -2,7 +2,7 @@
 
 const URL = require('url').URL;
 const validUrl = require('valid-url');
-const urlSchema = require('../db/models/url');
+const urlSchema = require('../models/url');
 
 const createUrl = async (req, res) => {
   try {
