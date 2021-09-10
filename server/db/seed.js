@@ -1,10 +1,11 @@
 'use strict';
+
 const seeder = require('mongoose-seed');
-const cn = require('./database').cn;
+const cn = require('../db/database').cn;
 const db = `mongodb://${cn.host}:${cn.port}/${cn.database}`;
 
 seeder.connect(db, () => {
-  seeder.loadModels(['./db/models/user', './db/models/url']);
+  seeder.loadModels(['./models/user', './models/url']);
   seeder.clearModels(['user', 'url'], () => {
     seeder.populateModels(data, (err, done) => {
       if (err) {
