@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  database:
+  mongoDB:
     container_name: ${APP_PREFIX}-mongoDB
     image: mongo:4.4.3
     volumes:
@@ -37,6 +37,28 @@ services:
     networks:
       - webnet
     depends_on:
-      - database
+      - mongoDB
+
+  web-client:
+    container_name: ${APP_PREFIX}-client
+    image: ${APP_PREFIX}-client:latest
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    restart: on-failure
+    command: yarn run serve
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - mongoDB
+      - server
 networks:
   webnet:
