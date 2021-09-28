@@ -1,16 +1,28 @@
-#Here we are getting our node as Base image
-FROM node:15.5.1-alpine3.10
-#Creating a new directory for app files and setting path in the container
-RUN mkdir -p /usr/src/app
-#setting working directory in the container
+# Latest node lts image
+FROM node:lts-alpine3.14 As development
+# Build step for development
 WORKDIR /usr/src/app
-#copying the package.json file(contains dependencies) from project source dir to container dir
-COPY package.json /usr/src/app
-# installing the dependencies into the container
-RUN npm install
-#copying the source code of Application into the container dir
-COPY . /usr/src/app
+COPY package.json yarn.lock ./
+# Install development dependencies
+RUN yarn --only=development
+# Copy the source code to app dir
+COPY . .
 #container exposed network port number
 EXPOSE 7500
-#command to run within the container
+# Run app
+CMD ["yarn", "run", "dev"]
+
+# Latest node lts image
+FROM node:lts-alpine3.14 as production
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+# Build step for production
+WORKDIR /usr/src/app
+COPY package.json yarn.lock ./
+# Install production dependencies
+RUN yarn --only=production
+# Copy the source code to app dir
+COPY . .
+COPY --from=development /usr/src/app/dist ./dist
+# Run app
 CMD ["node", "app.js"]
