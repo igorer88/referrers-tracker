@@ -1,20 +1,42 @@
-version: '3'
+version: '3.8'
+
 services:
   database:
-    container_name: RT-mongoDB
+    container_name: ${APP_PREFIX}-mongoDB
     image: mongo:4.4.3
     volumes:
-      - ./data:/data/
+      - ./server/data:/data/
+      - ./server/logs/db:/usr/src/app/logs/db/
     ports:
-      - '27018:27017'
+      - ${DB_PORT}:${DB_PORT}
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+    command:
+      ['--logpath', '/usr/src/app/logs/db/logs.log', '--logappend', '--quiet']
+    networks:
+      - webnet
+
   server:
-    container_name: RT-Server
+    container_name: ${APP_PREFIX}-server
     image: referrer-tracker:latest
-    build: ./server .
-    ports:
-      - '7500:7500'
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: development
     volumes:
-      - .:/app
-      - ./data/error.log:/usr/src/app/error.log
-    links:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${API_PORT}:${API_PORT}
+    command: yarn run dev
+    restart: on-failure
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
       - database
+networks:
+  webnet:
