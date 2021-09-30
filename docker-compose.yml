@@ -10,8 +10,8 @@ services:
     ports:
       - ${DB_PORT}:${DB_PORT}
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      # - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      # - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
       - MONGO_INITDB_DATABASE=${DB_NAME}
     command:
       ['--logpath', '/usr/src/app/logs/db/logs.log', '--logappend', '--quiet']
@@ -30,7 +30,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${API_PORT}:${API_PORT}
-    command: yarn run dev
+    command: sh -c "yarn run seed && yarn run dev"
     restart: on-failure
     env_file:
       - .env
@@ -60,5 +60,6 @@ services:
     depends_on:
       - mongoDB
       - server
+
 networks:
   webnet:
