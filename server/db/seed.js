@@ -1,7 +1,7 @@
 'use strict';
 
 const seeder = require('mongoose-seed');
-const cn = require('../db/database').cn;
+const cn = require('./database').cn;
 const db = `mongodb://${cn.host}:${cn.port}/${cn.database}`;
 
 seeder.connect(db, () => {
@@ -27,7 +27,7 @@ const data = [
         _id: '600353d679c7ab42d17e2d91',
         username: 'admin',
         password:
-          '$2b$10$FD1rksY5YhB1fomqDyfyFev.gs04P595a4v40TFlu8lTovigj.fV.',
+          '$2b$10$FD1rksY5YhB1fomqDyfyFev.gs04P595a4v40TFlu8lTovigj.fV.', // asdf
         verified: true,
         deleted: false,
       },
