@@ -88,7 +88,6 @@ const login = async (req, res) => {
           message: 'Username and/or password are incorrect',
         });
       } else {
-        console.log(user.password);
         user.password = undefined;
         user.__v = undefined;
         res.json({
@@ -105,11 +104,11 @@ const login = async (req, res) => {
     }
   } catch (error) {
     console.error('controller', error);
-    // return res.status(500).send({
-    //   code: 500,
-    //   status: 'Error',
-    //   message: 'Something went wrong. Please try again.',
-    // });
+    return res.status(500).send({
+      code: 500,
+      status: 'Error',
+      message: 'Something went wrong. Please try again.',
+    });
   }
 };
 
