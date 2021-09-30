@@ -7,7 +7,7 @@ COPY package.json yarn.lock ./
 RUN yarn --only=development
 # Copy the source code to app dir
 COPY . .
-#container exposed network port number
+# Container exposed network port number
 EXPOSE 7500
 # Run app
 CMD ["yarn", "run", "dev"]
