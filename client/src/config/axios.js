@@ -1,6 +1,6 @@
 import axios from 'axios';
-const host = process.env.VUE_APP_API_HOST;
-const port = process.env.VUE_APP_API_PORT;
+const host = process.env.VUE_APP_API_HOST || 'localhost';
+const port = process.env.VUE_APP_API_PORT || 7500;
 
 const instance = axios.create({
   baseURL: `http://${host}:${port}/api/`
